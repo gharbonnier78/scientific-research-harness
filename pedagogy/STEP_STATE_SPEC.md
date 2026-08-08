@@ -85,6 +85,25 @@ Authoritative step state
 
 For an expert reader, the first two views may be sufficient. The `Autrement dit` section can live as a collapsible subsection, linked companion, or explicit subchapter so that elementary explanation does not pollute an expert's reading path.
 
+## Verbatim dialogue preservation
+
+Sometimes the **dialogue itself** is the pedagogical object: a question exposes a hidden assumption, an incomprehension identifies where expert priors were silently assumed, a reviewer objection changes the mental model, or a correction is more instructive when the initial formulation remains visible.
+
+In those cases the harness MAY preserve a **verbatim dialogue trace** in addition to the structured step-state.
+
+A verbatim dialogue trace SHOULD:
+
+- preserve the actual sequence of user/reviewer questions and answers;
+- preserve doubts, corrections, intermediate misunderstandings, and changes of wording when they are part of the learning path;
+- preserve original wording rather than replacing it with a polished retrospective narrative;
+- clearly state that it is pedagogical history, not scientific evidence, gate policy, or an authoritative protocol;
+- link to the authoritative scientific objects when relevant;
+- remain append-only or be superseded explicitly if a correction is required.
+
+Do not use verbatim preservation as a reason to archive every conversation. Keep it when removing the conversational path would remove material understanding of **how the concept became clear or how a decision changed**.
+
+A later textbook-style explanation MAY be derived from the dialogue, but it MUST NOT replace or silently rewrite the preserved trace.
+
 ## Preservation rule
 
 A step-state that later proves incomplete or wrong SHOULD remain available as an historical pedagogical object if it records a genuine prior belief or understanding. Later states link to it and explain what changed. Do not silently rewrite the old explanation to make the final solution look inevitable.
@@ -95,7 +114,7 @@ A step-state that later proves incomplete or wrong SHOULD remain available as an
 - **Chronicle constrains the decision.**
 - **Pedagogy explains the decision.**
 
-Removing a pedagogical step-state MUST NOT change scientific runner behavior, gates, claims, or evidence.
+Removing a pedagogical step-state or verbatim dialogue trace MUST NOT change scientific runner behavior, gates, claims, or evidence.
 
 ## Suggested metadata
 
@@ -110,6 +129,7 @@ A machine-readable step-state may include:
 - `scientific_view`
 - `engineering_view`
 - `autrement_dit`: optional
+- `verbatim_dialogue_refs`: optional
 - `what_changed`
 - `what_remains_open`
 - `supersedes` / `superseded_by`
@@ -117,4 +137,4 @@ A machine-readable step-state may include:
 
 ## End-of-study expectation
 
-At study closure, the harness SHOULD assemble selected step-states into the Learning & Replay Pack. The final learning path should show not only the polished result, but the sequence of meaningful changes in understanding that produced it.
+At study closure, the harness SHOULD assemble selected step-states and, where valuable, linked dialogue traces into the Learning & Replay Pack. The final learning path should show not only the polished result, but the sequence of meaningful changes in understanding that produced it.
