@@ -6,6 +6,18 @@
 **Authority boundary:** removing this file changes no runner behavior. The project
 Scientific Chronicle and executable contracts constrain the run; this file explains why.
 
+## Role inside the harness
+
+This is a reusable teaching example governed by `HARNESS.md`; it is not the harness's
+attempt to replace a teacher, textbook, researcher or authoritative source. The scientific
+facts and executable evidence remain in the consumer study. The harness contributes the
+methodological frame used to expose prerequisites, connect engineering choices to scientific
+assumptions, distinguish claims from evidence and define understanding gates.
+
+A consuming project should reference the pinned harness contract, then keep its own
+domain-specific implementation, chronicle entry and evidence locally. This case may be
+linked or adapted as pedagogy, but it must not become a second source of scientific truth.
+
 ## Pedagogical concept contract
 
 This case instantiates `pedagogy/PEDAGOGICAL_CONCEPT_CONTRACT.md`. Its target concept is:
