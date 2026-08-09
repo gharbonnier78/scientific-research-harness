@@ -1,0 +1,49 @@
+schema_version: "0.1"
+
+harness:
+  repository: gharbonnier78/scientific-research-harness
+  ref: "<immutable-tag-or-commit-sha>"
+  entrypoint: HARNESS.md
+
+consumer:
+  repository: "<owner/repository>"
+  project_id: "<stable-project-id>"
+  instruction_entrypoints:
+    - AGENTS.md
+
+authority:
+  sources:
+    - id: "<source-id>"
+      reference: "<paper-protocol-dataset-or-specification>"
+      role: "<what-this-source-authorizes>"
+  domain_experts: []
+  prohibited_substitution:
+    - "The harness and LLM explanations do not replace authoritative sources or expert judgment."
+
+artifacts:
+  claims: []
+  evidence: []
+  scientific_gates: []
+  chronicle: null
+  pedagogy: []
+  handoff: null
+
+execution:
+  environment_lock: null
+  replay_commands: []
+  randomness:
+    status: "not_applicable" # not_applicable | declared
+    root_entropy_policy: null
+    lineage_artifact: null
+  concurrency:
+    status: "not_applicable" # not_applicable | declared
+    reference_path: null
+    equivalence_evidence: null
+
+local_extensions: []
+deviations: []
+
+adoption:
+  adopted_at: "<ISO-8601-date>"
+  adopted_by: "<human-or-agent-identifier>"
+  notes: null
