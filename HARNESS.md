@@ -180,8 +180,10 @@ scientific narrative.
 ## Canonical companion specifications
 
 - `design/HARNESS_REUSE_MODEL.md`
+- `design/PROPERTY_TO_TEST_DERIVATION.md`
 - `pedagogy/STEP_STATE_SPEC.md`
 - `pedagogy/PEDAGOGICAL_CONCEPT_CONTRACT.md`
+- `pedagogy/HEURISTIC_FALSIFICATION_LAB.md`
 - applicable Scientific Design Records under `design/`
 - reusable case studies under `pedagogy/case-studies/`
 
