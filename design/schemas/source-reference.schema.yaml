@@ -1,0 +1,78 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://example.org/scientific-research-harness/source-reference.schema.yaml
+title: Generic Resource Reference
+type: object
+required:
+  - id
+  - title
+  - resource_type
+  - location
+properties:
+  id:
+    type: string
+  title:
+    type: string
+  resource_type:
+    type: string
+    enum:
+      - paper
+      - standard
+      - book
+      - web_page
+      - github_repository
+      - github_location
+      - pdf
+      - notebook
+      - dataset
+      - experiment
+      - artifact
+      - toy
+      - simulator
+      - replay
+      - other
+  location:
+    type: object
+    required: [provider]
+    properties:
+      provider:
+        type: string
+      canonical_uri:
+        type: string
+      repository:
+        type: string
+      ref:
+        type: string
+      commit:
+        type: string
+      path:
+        type: string
+      anchor:
+        type: string
+      line_start:
+        type: integer
+        minimum: 1
+      line_end:
+        type: integer
+        minimum: 1
+  tags:
+    type: array
+    items:
+      type: string
+  domains:
+    type: array
+    items:
+      type: string
+  projects:
+    type: array
+    items:
+      type: string
+  provenance:
+    type: object
+    additionalProperties: true
+  analysis_refs:
+    type: array
+    items:
+      type: string
+  review_status:
+    type: string
+additionalProperties: true
