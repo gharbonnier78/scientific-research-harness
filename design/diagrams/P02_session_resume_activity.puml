@@ -1,0 +1,43 @@
+@startuml
+
+title Conversational Scientific CLI - Session Resume Activity
+
+start
+:Receive human command;
+:Resolve intent;
+
+if (START or CONTINUE?) then (yes)
+  :Resolve study manifest;
+  :Resolve canonical repository;
+  :Resolve active branch / PR / investigation;
+  :Read current commit;
+  :Read last checkpoint / reviewed commit;
+  :Load open review findings;
+  :Load resolved findings awaiting verification;
+  :Load latest experiments and evidence;
+  :Resolve curated sources if relevant;
+  :Compute meaningful delta;
+  :Display checkpoint;
+  stop
+else (no)
+  :Load minimum context required by bounded command;
+endif
+
+if (STATUS?) then (yes)
+  :Display state only;
+  stop
+else (no)
+endif
+
+if (REVIEW / CHECK / CHALLENGE / TRACE / EVIDENCE?) then (yes)
+  :Perform one bounded scientific action;
+  :Expose assumptions, evidence, findings and uncertainty;
+  :Persist material state change when project supports it;
+  :Display result and recommended next bounded action;
+  stop
+else (no)
+  :Ask only if intent cannot be resolved safely;
+  stop
+endif
+
+@enduml
