@@ -1,0 +1,57 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://example.org/scientific-research-harness/study-manifest.schema.yaml
+title: Study Manifest
+type: object
+required:
+  - study_id
+  - title
+  - canonical_repository
+properties:
+  study_id:
+    type: string
+  title:
+    type: string
+  objective:
+    type: string
+  canonical_repository:
+    type: object
+    required: [provider, repository]
+    properties:
+      provider:
+        type: string
+      repository:
+        type: string
+      default_branch:
+        type: string
+  state:
+    type: object
+    properties:
+      active_branch:
+        type: string
+      active_pr:
+        oneOf:
+          - type: integer
+          - type: string
+      checkpoint_file:
+        type: string
+  artifacts:
+    type: object
+    additionalProperties:
+      type: string
+  context:
+    type: object
+    properties:
+      context_fabric:
+        type: string
+      source_sets:
+        type: array
+        items:
+          type: string
+  roles:
+    type: object
+    properties:
+      scientist_contract:
+        type: string
+      reviewer_contract:
+        type: string
+additionalProperties: true
