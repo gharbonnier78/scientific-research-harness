@@ -107,6 +107,24 @@ Run the smallest sufficient checks for the bounded claim. Separate:
 - measured results from extrapolations;
 - infrastructure failure from scientific failure.
 
+For a change that can affect scientific admissibility, execution semantics, randomness or
+concurrency guarantees, artifact integrity, gate behavior, or an authorization boundary, an
+independent review MUST be evidence-based rather than a restatement of the PR description.
+When the repository permits execution, the reviewer MUST execute the relevant bounded tests,
+guards, preflights, reconstructions or replays needed to establish the load-bearing claims,
+or mark them explicitly `NOT_VERIFIED`. Green CI is supporting evidence, not a substitute
+for this independent verification.
+
+The review MUST distinguish:
+
+- independently confirmed facts from author assertions;
+- blocking findings from non-blocking improvements;
+- engineering merge approval from scientific execution or gate authorization;
+- verified invariants from anything that remains `NOT_VERIFIED`.
+
+The reusable request and output contract is `templates/independent-review-request.md`.
+Applicable reviews SHOULD use that structure or an equivalent that is at least as strict.
+
 ### 5. Explain
 
 When work introduces a difficult or hidden prerequisite, apply the pedagogical concept
@@ -182,6 +200,7 @@ scientific narrative.
 - `design/HARNESS_REUSE_MODEL.md`
 - `pedagogy/STEP_STATE_SPEC.md`
 - `pedagogy/PEDAGOGICAL_CONCEPT_CONTRACT.md`
+- `templates/independent-review-request.md`
 - applicable Scientific Design Records under `design/`
 - reusable case studies under `pedagogy/case-studies/`
 
