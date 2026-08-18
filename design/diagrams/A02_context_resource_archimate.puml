@@ -1,0 +1,42 @@
+@startuml
+!include <archimate/Archimate>
+
+title Context and Resource Architecture
+
+Application_Component(ext, "External / Internal Providers")
+Application_Component(conn, "Provider Connectors")
+Application_Component(fabric, "Context Fabric")
+Application_Component(mcp, "MCP Interface")
+Application_Component(diderot, "Diderot Dynamic Library")
+Application_Component(llm, "LLM Consumer")
+
+Data_Object(resource, "Resource Reference")
+Data_Object(locator, "Precise Locator")
+Data_Object(analysis, "Analysis / Digestion")
+Data_Object(tags, "Tags / Classification")
+Data_Object(prov, "Provenance / Review Status")
+
+Rel_Flow(ext, conn, "technical access")
+Rel_Access(conn, resource, "retrieves metadata/content")
+Rel_Access(fabric, resource, "indexes")
+Rel_Access(fabric, locator, "resolves")
+Rel_Access(fabric, analysis, "links")
+Rel_Access(fabric, tags, "classifies")
+Rel_Access(fabric, prov, "preserves")
+Rel_Serving(fabric, mcp, "search/fetch context")
+Rel_Serving(mcp, llm, "machine access")
+Rel_Serving(fabric, diderot, "human discovery")
+
+note bottom of resource
+Examples: paper, standard, web page,
+GitHub repo, commit/path/lines,
+notebook, dataset, PDF, toy, artifact.
+end note
+
+note right of analysis
+Resource and analysis are distinct objects.
+An analysis may cite the whole resource or
+one or more precise locations.
+end note
+
+@enduml
