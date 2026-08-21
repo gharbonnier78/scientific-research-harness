@@ -77,6 +77,40 @@ The harness MUST NOT present itself as the origin of domain knowledge. A pedagog
 explanation MUST point back to the authoritative object it explains. An understanding gate
 MUST NOT change scientific evidence or authorize a claim.
 
+## Human comprehension and canonicalization axiom
+
+A claim cannot reach canonical status solely because an automated verifier accepted it.
+At least one accountable human MUST be capable of explaining the result, its evidence,
+limitations, provenance and significance.
+
+This requirement governs **canonical promotion**, not scientific truth. A claim MAY be
+scientifically valid, reproducible and machine-verified while remaining non-canonical.
+Conversely, a clear human explanation MUST NOT rescue evidence that fails a scientific gate.
+
+For harness purposes, `canonical` means canonical for the declared project, repository,
+corpus or knowledge base. It does not imply universal scientific consensus.
+
+An LLM, agent, proof assistant, CI system, test runner or formal verifier MAY generate,
+check, challenge and prepare a canonicalization candidate. Automated success alone MUST NOT
+be converted into a passing human-comprehension gate or canonical status.
+
+A canonicalization claim MUST preserve an accountable human and recoverable evidence that
+this person can explain, at an appropriate level:
+
+- the result or claim;
+- the evidence and checks actually performed;
+- the material assumptions, limitations and unresolved uncertainty;
+- the provenance of sources, data, code and automated assistance;
+- the significance of the result and what it legitimately enables.
+
+Material failed hypotheses, counterexamples, corrections, reviewer objections, ablations
+and reasoning changes SHOULD remain recoverable when they carry explanatory value. A
+polished final artifact SHOULD NOT erase this informative friction.
+
+The full companion rule is defined in
+`design/HUMAN_COMPREHENSION_CANONICALIZATION.md`. Its immediate design source and bounded
+extraction are recorded in `sources/tao-2026-mathematics-in-the-age-of-ai.md`.
+
 ## Required lifecycle
 
 ### 1. Bind
@@ -135,6 +169,7 @@ A consumer claiming compliance MUST make the following recoverable:
 | Concurrency, if used | serial/reference equivalence appropriate to the claim |
 | Gates | named criteria and current status |
 | Pedagogy | prerequisite-aware explanation for material difficult concepts |
+| Canonicalization, if claimed | accountable human plus recoverable comprehension evidence |
 | Chronicle | traceable decisions without retrospective rewriting |
 | Handoff | unresolved conditions and exact next admissible action |
 
@@ -180,6 +215,7 @@ scientific narrative.
 ## Canonical companion specifications
 
 - `design/HARNESS_REUSE_MODEL.md`
+- `design/HUMAN_COMPREHENSION_CANONICALIZATION.md`
 - `pedagogy/STEP_STATE_SPEC.md`
 - `pedagogy/PEDAGOGICAL_CONCEPT_CONTRACT.md`
 - applicable Scientific Design Records under `design/`
