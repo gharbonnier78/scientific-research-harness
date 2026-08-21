@@ -77,6 +77,25 @@ The harness MUST NOT present itself as the origin of domain knowledge. A pedagog
 explanation MUST point back to the authoritative object it explains. An understanding gate
 MUST NOT change scientific evidence or authorize a claim.
 
+## Canonicalization axiom
+
+> **A claim cannot reach canonical status solely because an automated verifier accepted it. At least one accountable human must be capable of explaining the result, its evidence, limitations, provenance and significance.**
+
+Automated proof, CI success, reproducibility checks, statistical validation, reviewer agents,
+or other machine gates MAY establish bounded evidence states such as `verified`, `reproduced`
+or `all_checks_passed`. They MUST NOT, by themselves, promote a claim to canonical status.
+
+A project that claims a result is closed, understood, canonicalization-ready, or canonical
+MUST make the accountable human understanding gate explicit. The accountable human need not
+manually reproduce every machine computation, but must be able to reconstruct and explain the
+question, assumptions, result, evidence, provenance, material limitations, and significance.
+Where failed hypotheses, counterexamples, ablations, reversals, or unexpected observations
+materially affect understanding, the chronicle SHOULD preserve them rather than replacing the
+research path with a polished success narrative.
+
+The normative rationale, source traceability, and consequences of this axiom are recorded in
+`design/SDR-004-human-canonicalization-requires-accountable-understanding.md`.
+
 ## Required lifecycle
 
 ### 1. Bind
@@ -114,6 +133,9 @@ contract: vocabulary, intuition, concrete example, mathematical descent, plain-l
 interpretation, executable check, misconception and understanding gate. This layer explains
 the authoritative work; it does not replace it.
 
+Pedagogy is part of closure, not optional presentation polish. A machine-verified result that
+no accountable human can explain remains incomplete for canonicalization under this harness.
+
 ### 6. Chronicle and hand off
 
 Record decisions and blockers append-only when they change what may happen next. A handoff
@@ -135,7 +157,8 @@ A consumer claiming compliance MUST make the following recoverable:
 | Concurrency, if used | serial/reference equivalence appropriate to the claim |
 | Gates | named criteria and current status |
 | Pedagogy | prerequisite-aware explanation for material difficult concepts |
-| Chronicle | traceable decisions without retrospective rewriting |
+| Human canonicalization gate | accountable human can explain result, evidence, limitations, provenance and significance before canonical promotion |
+| Chronicle | traceable decisions without retrospective rewriting; material failed paths retained when epistemically relevant |
 | Handoff | unresolved conditions and exact next admissible action |
 
 Not every project needs randomness, concurrency or advanced mathematics. `not_applicable`
@@ -180,6 +203,7 @@ scientific narrative.
 ## Canonical companion specifications
 
 - `design/HARNESS_REUSE_MODEL.md`
+- `design/SDR-004-human-canonicalization-requires-accountable-understanding.md`
 - `pedagogy/STEP_STATE_SPEC.md`
 - `pedagogy/PEDAGOGICAL_CONCEPT_CONTRACT.md`
 - applicable Scientific Design Records under `design/`
