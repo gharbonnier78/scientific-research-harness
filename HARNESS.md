@@ -145,6 +145,41 @@ A POC/MVP MAY record a deliberate deferred control when implementing it now woul
 complexity than decision value, provided the risk, trigger for escalation and next action are
 visible.
 
+### 4c. Promote telemetry to engineering/test evidence only by contract
+
+Runtime telemetry MAY become engineering or test evidence when it is evaluated against an
+expected signal contract declared before the relevant execution. It does not thereby become
+scientific evidence; the provenance classes MUST remain distinct.
+
+When OpenTelemetry signals are used as evidence, the workstream MUST identify the applicable
+OpenTelemetry specification and semantic-convention version or immutable reference. It MUST
+NOT silently redefine standardized signal fields, semantic attributes, span kinds or units.
+Project-specific conventions SHOULD use a bounded namespace.
+
+A behavioral model such as a UML activity, sequence or state model MAY be used to specify the
+expected telemetry topology. The mapping MUST be explicit: not every model element is a span.
+Operations with meaningful duration may be spans, instantaneous changes may be events or
+structured logs, protocol operations should follow applicable semantic conventions, and
+aggregated measurements should remain metrics. Individual metric observations used as path
+evidence SHOULD be correlated using exemplars rather than high-cardinality trace identifiers
+as metric attributes.
+
+A `SpanId` MAY be the primary evidence-query handle for a tested operation or scenario. The
+evidence service MUST preserve and resolve its associated `TraceId` and the required child or
+descendant span topology. Expected-versus-actual verification SHOULD cover applicable span
+cardinality and topology, required attributes, correlated logs/events, metrics and units,
+metric exemplars, prohibited signals, and unexpected material signals when the contract is
+closed.
+
+The evidence pack SHOULD retain the expected contract, the exact query or recovery method,
+the entry SpanId and TraceId, the raw returned signals or immutable references to them, and
+a machine- and human-reviewable comparison verdict. Sampling, filtering or retention MUST
+NOT silently remove signals required by a qualification contract. A missing signal caused by
+collection or query failure MUST be distinguishable from product-behavior failure and from a
+telemetry-contract failure.
+
+The reusable details are defined in `design/TELEMETRY_EVIDENCE_CONTRACT.md`.
+
 ### 5. Explain
 
 When work introduces a difficult or hidden prerequisite, apply the pedagogical concept
@@ -172,6 +207,7 @@ A consumer claiming compliance MUST make the following recoverable:
 | Architecture, if code is produced | system/software/code documentation proportional to the selected care profile |
 | Code quality, if code is produced | focused automated checks and tests, with failures visible |
 | Security, if code is exposed or deployed | applicable secure-design requirements, automated checks and explicit residual risks |
+| Telemetry used as test evidence, if applicable | predeclared expected-signal contract, SpanId/TraceId correlation, recoverable actual signals/query and explicit expected-vs-actual verdict |
 | Randomness, if used | root entropy policy, task-bound lineage and replay metadata |
 | Concurrency, if used | serial/reference equivalence appropriate to the claim |
 | Gates | named criteria and current status |
@@ -221,6 +257,7 @@ scientific narrative.
 ## Canonical companion specifications
 
 - `design/HARNESS_REUSE_MODEL.md`
+- `design/TELEMETRY_EVIDENCE_CONTRACT.md`
 - `pedagogy/STEP_STATE_SPEC.md`
 - `pedagogy/PEDAGOGICAL_CONCEPT_CONTRACT.md`
 - applicable Scientific Design Records under `design/`
