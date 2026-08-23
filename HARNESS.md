@@ -107,6 +107,44 @@ Run the smallest sufficient checks for the bounded claim. Separate:
 - measured results from extrapolations;
 - infrastructure failure from scientific failure.
 
+### 4b. Engineer code with proportional care
+
+When a workstream produces executable code, it MUST make the implementation understandable
+and reviewable by a competent human. At minimum, the repository MUST document the relevant
+system context, software architecture or decomposition, and code structure/change rules.
+Code that materially changes those boundaries MUST update the corresponding documentation.
+
+Engineering assurance MUST be proportional to the artifact and its exposure. The label
+`POC` or `MVP` is not a waiver for basic engineering care, but it is also not a reason to
+build production ceremony before it is decision-relevant. The local adoption manifest MUST
+select or justify an engineering-care profile:
+
+| Profile | Minimum care |
+|---|---|
+| Spike | Disposable/local only; no secrets; reproducible run; syntax/build check; explicit limitations. |
+| POC | Spike + small architecture note; focused unit tests; code/static checks; dependency/secret review; relevant security assumptions. |
+| MVP | POC + deployable architecture and code docs; tests for critical logic and smoke path; automated code/security checks; least privilege; hardened defaults; explicit residual risks. |
+| Production | Risk-based project standard stronger than MVP; threat model, operational controls, recovery/monitoring, supply-chain hardening and verification depth appropriate to impact. |
+
+For web/API software, OWASP Top 10 MUST be treated as an awareness baseline, not as proof of
+coverage. Projects SHOULD derive testable security requirements from the current OWASP ASVS
+(or a stricter applicable standard) and use the current OWASP Top 10, SAMM/DSOMM and relevant
+cheat sheets to prioritize risk. A project MUST NOT claim “OWASP compliant” merely because
+a scanner or checklist ran.
+
+For POC/MVP code exposed outside a local machine, the smallest sufficient automated set
+SHOULD normally include: unit tests for critical pure logic, syntax/type/lint or equivalent
+code checks, secret scanning, dependency/supply-chain review, static security analysis where
+supported, and an executable smoke/health check. Containerized services SHOULD additionally
+run as non-root where practical and scan the built image for material vulnerabilities.
+Long-lived cloud credentials SHOULD NOT be stored when workload identity/OIDC is available.
+
+Security findings MUST be fixed, shown not applicable, or explicitly accepted with bounded
+scope and rationale. The workstream MUST distinguish a missing check from a passing check.
+A POC/MVP MAY record a deliberate deferred control when implementing it now would add more
+complexity than decision value, provided the risk, trigger for escalation and next action are
+visible.
+
 ### 5. Explain
 
 When work introduces a difficult or hidden prerequisite, apply the pedagogical concept
@@ -131,6 +169,9 @@ A consumer claiming compliance MUST make the following recoverable:
 | Sources | authoritative references with provenance |
 | Scientific framing | assumptions, estimand/claim and inferential limits |
 | Execution | code/config/environment and reproducible command |
+| Architecture, if code is produced | system/software/code documentation proportional to the selected care profile |
+| Code quality, if code is produced | focused automated checks and tests, with failures visible |
+| Security, if code is exposed or deployed | applicable secure-design requirements, automated checks and explicit residual risks |
 | Randomness, if used | root entropy policy, task-bound lineage and replay metadata |
 | Concurrency, if used | serial/reference equivalence appropriate to the claim |
 | Gates | named criteria and current status |
