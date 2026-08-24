@@ -193,6 +193,31 @@ Record decisions and blockers append-only when they change what may happen next.
 MUST identify the pinned harness ref, frozen artifacts, evidence produced, commands needed
 for replay, unresolved gates and the exact next admissible action.
 
+### 6b. Make delegated reviews directly navigable
+
+When a pull request, gate review, independent verification, replay request, or other evidence
+review is delegated to another human, LLM, agent or external tool, the request MUST provide
+direct canonical URLs for the objects the reviewer is expected to inspect. The workstream
+MUST NOT assume that repository search, indexing, prior conversation context, or connector
+discovery will locate the target reliably.
+
+For a pull-request review, the navigation block MUST include at least:
+
+- the repository URL;
+- the direct pull-request URL;
+- the pinned harness URL at the exact immutable commit or tag used to judge compliance;
+- the head/base commit or branch URLs when they are material to the review;
+- direct URLs for non-obvious normative artifacts that cannot be reliably discovered from
+  the pull request itself.
+
+Immutable blob or commit URLs SHOULD be preferred for normative references. A moving branch
+URL MAY be included for convenience, but MUST NOT replace the immutable reference that
+defines the review basis. If a required object is inaccessible, the reviewer MUST report the
+missing evidence and MUST NOT silently replace it with search snippets, memory, or a prose
+summary supplied by the author.
+
+The reusable request template is `templates/independent-pr-review-request.md`.
+
 ## Minimum conformance evidence
 
 A consumer claiming compliance MUST make the following recoverable:
@@ -214,6 +239,7 @@ A consumer claiming compliance MUST make the following recoverable:
 | Pedagogy | prerequisite-aware explanation for material difficult concepts |
 | Chronicle | traceable decisions without retrospective rewriting |
 | Handoff | unresolved conditions and exact next admissible action |
+| Delegated PR/review navigation, if applicable | direct repository/PR URLs plus immutable harness and material review-basis URLs |
 
 Not every project needs randomness, concurrency or advanced mathematics. `not_applicable`
 is acceptable only when justified explicitly.
@@ -260,6 +286,7 @@ scientific narrative.
 - `design/TELEMETRY_EVIDENCE_CONTRACT.md`
 - `pedagogy/STEP_STATE_SPEC.md`
 - `pedagogy/PEDAGOGICAL_CONCEPT_CONTRACT.md`
+- `templates/independent-pr-review-request.md`
 - applicable Scientific Design Records under `design/`
 - reusable case studies under `pedagogy/case-studies/`
 
