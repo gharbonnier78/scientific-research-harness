@@ -150,6 +150,42 @@ bounded sentinel that fails closed on the wrong convention.
 These controls are engineering/provenance evidence unless the local protocol explicitly defines
 them otherwise. They do not themselves satisfy a scientific gate.
 
+## Durable evidence retention
+
+When a control, replay, qualification run, independent review or scientific execution produces
+an artifact that may later be needed to justify a decision, reproduce a claim, diagnose a defect
+or hand off the study, the project MUST decide whether the platform-generated artifact is durable
+enough for the expected evidence lifetime.
+
+A temporary CI artifact, transient object-store URL, notebook runtime file or expiring attachment
+MUST NOT be treated as the sole durable evidence source when loss of that object would make a
+material decision unreconstructable.
+
+When durable retention is required, the project SHOULD archive the smallest sufficient evidence
+bundle in a repository or other controlled durable store, subject to size, confidentiality,
+licence and data-governance constraints. The retained bundle SHOULD include, as applicable:
+
+- the exact report/result files needed to reconstruct the verdict;
+- a cryptographic digest of the bundle and important contained artifacts;
+- run/job/artifact identifiers and the exact code/config commit that produced them;
+- relevant environment/protocol/model/dataset identifiers;
+- the evidence class and authority boundary (for example engineering/provenance vs scientific);
+- retention limitations, omitted sensitive bytes and the reason for omission;
+- a README or machine-readable manifest explaining replay/retrieval.
+
+Large, sensitive, licensed or regulated artifacts SHOULD NOT be copied into Git merely for
+convenience. In those cases the repository SHOULD retain a content-addressed manifest and a
+stable controlled-store locator/version/retention record sufficient to retrieve and verify the
+artifact under the applicable access policy.
+
+GitHub Actions artifacts or equivalent CI attachments MAY serve as transport and short-term
+review evidence, but their expiry policy MUST be recorded when they are material. A project
+SHOULD NOT discover at handoff time that the only copy of a load-bearing evidence ZIP expired.
+
+The retention decision is conditional on the real project situation: trivial diagnostics may be
+left ephemeral, while load-bearing evidence required for a gate, review, audit, publication or
+future replay should be retained proportionately.
+
 ## Artifact identity and preprocessing identity
 
 A model/checkpoint name is not sufficient scientific identity when multiple artifacts or
@@ -185,10 +221,11 @@ may happen next, for example:
 - two nominally identical artifacts require different input conventions;
 - a dataset failure/exclusion rule changes admissibility;
 - preprocessing drift invalidates replay;
-- an equivalence check closes or reopens a blocker.
+- an equivalence check closes or reopens a blocker;
+- a temporary evidence artifact is promoted to durable retention because it becomes load-bearing.
 
 The handoff SHOULD identify the frozen input contract, unresolved pipeline risks, replay command
-or check, and the exact next admissible action.
+or check, durable evidence location/digest where material, and the exact next admissible action.
 
 ## Pedagogical rule
 
@@ -208,7 +245,10 @@ This contract does not require:
 - a universal alignment, normalization or augmentation policy;
 - byte-identical outputs when the local claim only requires a weaker reviewed equivalence;
 - duplicate detection when overlap cannot affect the bounded claim;
+- committing large/sensitive/licensed evidence bytes to Git when a controlled durable store is
+  more appropriate;
 - production-grade data governance for a bounded research spike where it adds no decision value.
 
 The governing principle is proportionality: freeze and verify the input stages that can actually
-change the scientific or engineering conclusion.
+change the scientific or engineering conclusion, and retain evidence only to the degree needed to
+make material decisions reconstructable.
