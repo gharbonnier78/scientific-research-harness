@@ -1,0 +1,47 @@
+@startuml
+!include <archimate/Archimate>
+
+title Scientific Interaction Architecture
+
+Business_Actor(human, "Human Researcher")
+Business_Role(scientist, "Scientist Role")
+Business_Role(reviewer, "Reviewer Role")
+
+Application_Component(harness, "Scientific Research Harness")
+Application_Component(github, "GitHub / Project Repository")
+Application_Component(connector, "GitHub Connector / App")
+Application_Component(fabric, "Context Fabric")
+Application_Component(diderot, "Diderot / Human Library")
+Application_Component(notify, "Notification Channel")
+
+Data_Object(state, "Canonical Scientific State")
+Data_Object(resources, "Curated Resources + Analyses")
+Data_Object(attention, "Derived Attention State")
+
+Rel_Assignment(human, scientist, "steers")
+Rel_Assignment(human, reviewer, "requests/challenges")
+Rel_Serving(harness, scientist, "interaction contract")
+Rel_Serving(harness, reviewer, "interaction contract")
+Rel_Access(scientist, state, "read/write")
+Rel_Access(reviewer, state, "read/review")
+Rel_Access(github, state, "stores")
+Rel_Serving(connector, scientist, "technical GitHub access")
+Rel_Serving(connector, reviewer, "technical GitHub access")
+Rel_Access(fabric, resources, "curates/exposes")
+Rel_Serving(fabric, scientist, "context")
+Rel_Serving(fabric, reviewer, "context")
+Rel_Serving(fabric, diderot, "dynamic resource catalogue")
+Rel_Access(notify, attention, "presents")
+Rel_Serving(notify, human, "alerts / queued intents")
+Rel_Flow(github, notify, "webhook/event")
+
+note right of fabric
+Not a generic GitHub connector.
+Provides provenance-aware scientific context.
+end note
+
+note bottom of notify
+Attention only; no scientific authority.
+end note
+
+@enduml
