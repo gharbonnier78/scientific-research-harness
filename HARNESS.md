@@ -156,29 +156,7 @@ OpenTelemetry specification and semantic-convention version or immutable referen
 NOT silently redefine standardized signal fields, semantic attributes, span kinds or units.
 Project-specific conventions SHOULD use a bounded namespace.
 
-A behavioral model such as a UML activity, sequence or state model MAY be used to specify the
-expected telemetry topology. The mapping MUST be explicit: not every model element is a span.
-Operations with meaningful duration may be spans, instantaneous changes may be events or
-structured logs, protocol operations should follow applicable semantic conventions, and
-aggregated measurements should remain metrics. Individual metric observations used as path
-evidence SHOULD be correlated using exemplars rather than high-cardinality trace identifiers
-as metric attributes.
-
-A `SpanId` MAY be the primary evidence-query handle for a tested operation or scenario. The
-evidence service MUST preserve and resolve its associated `TraceId` and the required child or
-descendant span topology. Expected-versus-actual verification SHOULD cover applicable span
-cardinality and topology, required attributes, correlated logs/events, metrics and units,
-metric exemplars, prohibited signals, and unexpected material signals when the contract is
-closed.
-
-The evidence pack SHOULD retain the expected contract, the exact query or recovery method,
-the entry SpanId and TraceId, the raw returned signals or immutable references to them, and
-a machine- and human-reviewable comparison verdict. Sampling, filtering or retention MUST
-NOT silently remove signals required by a qualification contract. A missing signal caused by
-collection or query failure MUST be distinguishable from product-behavior failure and from a
-telemetry-contract failure.
-
-The reusable details are defined in `design/TELEMETRY_EVIDENCE_CONTRACT.md`.
+For the detailed telemetry evidence contract, see `design/TELEMETRY_EVIDENCE_CONTRACT.md`.
 
 ### 5. Explain
 
@@ -240,9 +218,10 @@ A consumer claiming compliance MUST make the following recoverable:
 | Chronicle | traceable decisions without retrospective rewriting |
 | Handoff | unresolved conditions and exact next admissible action |
 | Delegated PR/review navigation, if applicable | direct repository/PR URLs plus immutable harness and material review-basis URLs |
+| Load-bearing evidence retention, if applicable | durable bundle or controlled locator, cryptographic digest, producing run/commit and retention boundary |
 
-Not every project needs randomness, concurrency or advanced mathematics. `not_applicable`
-is acceptable only when justified explicitly.
+Not every project needs randomness, concurrency, durable evidence copies or advanced mathematics.
+`not_applicable` is acceptable only when justified explicitly.
 
 ## LLM thread startup record
 
@@ -283,6 +262,7 @@ scientific narrative.
 ## Canonical companion specifications
 
 - `design/HARNESS_REUSE_MODEL.md`
+- `design/INPUT_PIPELINE_AND_FROZEN_MODEL_CONTRACT.md`
 - `design/TELEMETRY_EVIDENCE_CONTRACT.md`
 - `pedagogy/STEP_STATE_SPEC.md`
 - `pedagogy/PEDAGOGICAL_CONCEPT_CONTRACT.md`
