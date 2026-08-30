@@ -11,6 +11,11 @@ It complements `STEP_STATE_SPEC.md`:
 - a **step-state** preserves a meaningful change in understanding;
 - a **concept contract** defines the minimum structure required to make one difficult concept understandable, traceable and executable.
 
+It also complements `MATHEMATICAL_NOTATION_CAPITALIZATION.md`. This contract governs
+understanding of the concept in the current learning step; the notation contract governs the
+durable cross-context recording of non-trivial notation used to express that concept. Apply
+both when both conditions are material, without duplicating the same pedagogical explanation.
+
 The contract is domain-agnostic. It may be reused in biometrics, statistics, geometric machine learning, control, filtering, optimization, probabilistic modelling, or other research areas.
 
 ## Core pedagogical descent
@@ -39,6 +44,12 @@ For every non-trivial new symbol, operator, map, space, distribution, statistic,
 Examples include symbols such as `Ad_g^*`, `g*`, a bootstrap multiplicity `m_i`, a covariance matrix, a likelihood, a Hamiltonian, a tangent space, or an operating threshold.
 
 The answer may be compact for expert readers, but the questions should remain recoverable in the learning path.
+
+These four questions are the local understanding check. When the symbol or operator is also a
+non-trivial notation that should remain reusable across later contexts, the workstream SHOULD
+also apply `MATHEMATICAL_NOTATION_CAPITALIZATION.md` to record its read-aloud form, formal and
+plain-language meaning, provenance, encounters, ambiguity and cross-domain connections in the
+consumer's canonical notation registry.
 
 ## Prerequisite graph
 
