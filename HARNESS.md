@@ -46,9 +46,13 @@ A declaration is a provenance dependency, not an automatic file import. A templa
 provided at `templates/harness-adoption.yaml`.
 
 A repository SHOULD reference the manifest from the instruction file actually read by its
-LLM agents, such as `AGENTS.md`, and from its human-facing contribution documentation.
-A new LLM thread MUST begin by loading the pinned harness contract and the local manifest
-before proposing outcome-bearing work.
+LLM agents, such as `AGENTS.md` or `CLAUDE.md`, and from its human-facing contribution
+documentation. A new LLM thread MUST begin by loading the pinned harness contract and the
+local manifest before proposing outcome-bearing work.
+
+The automatically discovered instruction file SHOULD remain a short map into the versioned
+system of record rather than duplicate the entire harness. Reusable bootstrap templates are
+provided under `templates/agent-bootstrap/`.
 
 If the pinned contract cannot be loaded, the agent MUST say so. It may perform bounded
 orientation work, but it MUST NOT claim harness compliance or release a scientific gate.
@@ -64,6 +68,7 @@ The harness owns reusable process constraints:
 - random-state and concurrency assurance when relevant;
 - distinction between evidence, decisions and explanations;
 - pedagogical descent, vocabulary, prerequisites and understanding gates;
+- mathematical-notation capitalization when learning-oriented mathematical language is material;
 - durable handoff of unresolved conditions.
 
 The consumer project owns the subject matter:
@@ -187,6 +192,13 @@ contract: vocabulary, intuition, concrete example, mathematical descent, plain-l
 interpretation, executable check, misconception and understanding gate. This layer explains
 the authoritative work; it does not replace it.
 
+When learning-oriented work introduces or meaningfully re-encounters non-trivial
+mathematical notation, also apply `pedagogy/MATHEMATICAL_NOTATION_CAPITALIZATION.md`. The
+consumer SHOULD maintain a canonical notation registry that distinguishes the mathematical
+concept from its glyph, records how the notation is read, and accumulates meaningful
+encounters and domains without creating duplicates. Agent-generated entries MUST NOT become
+reviewed/stable merely because the agent generated them.
+
 ### 6. Chronicle and hand off
 
 Record decisions and blockers append-only when they change what may happen next. A handoff
@@ -237,6 +249,7 @@ A consumer claiming compliance MUST make the following recoverable:
 | Concurrency, if used | serial/reference equivalence appropriate to the claim |
 | Gates | named criteria and current status |
 | Pedagogy | prerequisite-aware explanation for material difficult concepts |
+| Mathematical notation, if applicable | canonical notation record with reading, formal/plain meaning, example, encounter provenance and review status |
 | Chronicle | traceable decisions without retrospective rewriting |
 | Handoff | unresolved conditions and exact next admissible action |
 | Delegated PR/review navigation, if applicable | direct repository/PR URLs plus immutable harness and material review-basis URLs |
@@ -286,6 +299,8 @@ scientific narrative.
 - `design/TELEMETRY_EVIDENCE_CONTRACT.md`
 - `pedagogy/STEP_STATE_SPEC.md`
 - `pedagogy/PEDAGOGICAL_CONCEPT_CONTRACT.md`
+- `pedagogy/MATHEMATICAL_NOTATION_CAPITALIZATION.md`
+- `templates/agent-bootstrap/README.md`
 - `templates/independent-pr-review-request.md`
 - applicable Scientific Design Records under `design/`
 - reusable case studies under `pedagogy/case-studies/`
