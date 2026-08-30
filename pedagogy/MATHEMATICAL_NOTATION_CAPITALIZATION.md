@@ -13,6 +13,11 @@ It complements `PEDAGOGICAL_CONCEPT_CONTRACT.md`. The concept contract explains 
 idea; this contract makes the mathematical language used to express that idea durable and
 searchable.
 
+`PEDAGOGICAL_CONCEPT_CONTRACT.md` governs understanding of the concept in the current learning
+step; this contract governs durable cross-context recording of the notation used to express
+that concept. Apply both when both conditions are material. Do not duplicate the same
+pedagogical explanation merely to satisfy both contracts.
+
 The generic method belongs in the harness. Concrete notation entries and their learning
 history belong in a consumer knowledge base such as Diderot.
 
@@ -169,9 +174,15 @@ Maturity is pedagogical metadata. It MUST NOT be reported as scientific evidence
 
 ## Single-source publication rule
 
+A consumer MUST NOT maintain multiple independent canonical notation registries for the same
+learning scope. The canonical source of notation identity, meaning, provenance and encounter
+history must remain singular even when a project publishes several derived views.
+
 When a consumer publishes an interactive page, search index, knowledge graph, printable
 poster, PDF appendix or other view of the notation atlas, those outputs SHOULD be derived
-from one canonical notation registry rather than manually maintained as competing copies.
+from that canonical notation registry rather than manually maintained as competing copies.
+An intentionally frozen publication snapshot MAY be retained when reproducibility requires
+it, provided its provenance and relationship to the canonical registry are explicit.
 
 A printable representation MAY compress explanations, but it MUST preserve enough identity
 to trace an item back to its canonical registry entry.
@@ -209,7 +220,7 @@ A consuming project claiming notation capitalization SHOULD be able to answer:
 - How are new entries distinguished from re-encounters?
 - Can a learner see how the notation is read aloud?
 - Can every stable entry be traced to its source and at least one example?
-- Are web/search/print views generated from the same registry?
+- Are web/search/print views generated from or explicitly traceable to the same canonical registry?
 - What review or human-comprehension step promotes an entry beyond draft?
 
 The mechanism is successful when mathematical language becomes progressively easier to
