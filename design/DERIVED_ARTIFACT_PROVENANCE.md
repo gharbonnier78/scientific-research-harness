@@ -65,7 +65,7 @@ Validation SHOULD fail or surface an explicit discrepancy when:
 
 A build MAY repair missing derived metadata deterministically from the canonical source when that transformation is itself part of the declared publication mechanism.
 
-A build SHOULD NOT silently choose between contradictory authoritative values. Contradiction is a provenance defect that requires resolution.
+A build MUST NOT silently choose between contradictory authoritative values. Contradiction is a provenance defect that requires resolution.
 
 ## Evidence boundary
 
@@ -135,6 +135,8 @@ A consumer applying this contract SHOULD be able to answer:
 ## Origin and promotion boundary
 
 The immediate trigger for this proposal was an independently reviewed Diderot change in which CI exposed stale/missing release metadata and the consumer preserved a single release authority while repairing derived publication behavior.
+
+The Diderot implementation exercised deterministic repair/injection of missing release metadata; it did not yet exercise detection of present-but-contradictory values. Its evidence therefore motivates, but does not validate, the stronger contradiction rule proposed here.
 
 Consumer evidence motivates this reusable method; it does not make Diderot's implementation normative for other repositories.
 
