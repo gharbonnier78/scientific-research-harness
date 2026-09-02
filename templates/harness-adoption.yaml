@@ -29,6 +29,12 @@ artifacts:
   handoff: null
 
 execution:
+  engineering:
+    # Required when the workstream produces executable code; values mirror HARNESS.md section 4b.
+    care_profile: null # Spike | POC | MVP | Production
+    rationale: null
+    required_checks: []
+    deferred_controls: []
   environment_lock: null
   replay_commands: []
   randomness:
