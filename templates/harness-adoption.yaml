@@ -30,11 +30,11 @@ artifacts:
 
 execution:
   engineering:
-    # Required when the workstream produces executable code; values mirror HARNESS.md section 4b.
-    care_profile: null # Spike | POC | MVP | Production
+    # Required when the workstream produces executable code; use not_applicable for non-code work and justify it in rationale.
+    care_profile: null # not_applicable | Spike | POC | MVP | Production
     rationale: null
     required_checks: []
-    deferred_controls: []
+    deferred_controls: [] # each item: {control, risk, escalation_trigger, next_action}
   environment_lock: null
   replay_commands: []
   randomness:
