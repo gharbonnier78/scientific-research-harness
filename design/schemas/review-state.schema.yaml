@@ -1,0 +1,80 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://example.org/scientific-research-harness/review-state.schema.yaml
+title: Review State
+type: object
+required:
+  - id
+  - target
+  - status
+  - severity
+properties:
+  id:
+    type: string
+    pattern: '^R-[A-Za-z0-9._-]+$'
+  target:
+    type: object
+    required: [type, id]
+    properties:
+      type:
+        type: string
+        enum: [claim, pull_request, commit, experiment, artifact, document, other]
+      id:
+        type: string
+      commit:
+        type: string
+  reviewer_role:
+    type: string
+  reviewer_model:
+    type: string
+  severity:
+    type: string
+    enum: [FATAL, MAJOR, MINOR, EXTENSION]
+  verdict:
+    type: string
+    enum:
+      - SUPPORTED_WITH_CURRENT_EVIDENCE
+      - SUPPORTED_WITH_LIMITATIONS
+      - CHANGES_REQUIRED
+      - EXPERIMENT_REQUIRED
+      - INSUFFICIENT_EVIDENCE
+      - REFUTED
+      - UNRESOLVED
+  observation:
+    type: string
+  objection:
+    type: string
+  evidence:
+    type: array
+    items:
+      type: string
+  alternative_explanation:
+    type: string
+  resolution_condition:
+    type: string
+  recommended_action:
+    type: string
+  status:
+    type: string
+    enum: [open, responded, resolved, rejected, superseded]
+  response:
+    type: object
+    properties:
+      disposition:
+        type: string
+        enum:
+          - ACCEPT_OBJECTION
+          - PARTIALLY_ACCEPT
+          - REJECT_WITH_EVIDENCE
+          - REQUEST_CLARIFICATION
+          - RUN_EXPERIMENT
+          - REVISE_CLAIM
+          - ABANDON_CLAIM
+      rationale:
+        type: string
+      evidence:
+        type: array
+        items:
+          type: string
+      action_ref:
+        type: string
+additionalProperties: true

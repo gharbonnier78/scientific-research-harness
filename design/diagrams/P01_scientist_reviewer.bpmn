@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions_ScientificReview" targetNamespace="https://example.org/scientific-research-harness">
+  <bpmn:collaboration id="Collaboration_ScientificReview">
+    <bpmn:participant id="Participant_Human" name="Human Researcher" processRef="Process_Human" />
+    <bpmn:participant id="Participant_Agent" name="Scientist / Reviewer LLM" processRef="Process_Agent" />
+  </bpmn:collaboration>
+
+  <bpmn:process id="Process_Human" isExecutable="false">
+    <bpmn:startEvent id="Human_Start" name="Need to resume or inspect study" />
+    <bpmn:userTask id="Human_Command" name="Issue short command" />
+    <bpmn:userTask id="Human_Inspect" name="Inspect checkpoint / result" />
+    <bpmn:exclusiveGateway id="Human_Decide" name="Need another bounded action?" />
+    <bpmn:endEvent id="Human_End" name="Stop / defer" />
+    <bpmn:sequenceFlow id="HF1" sourceRef="Human_Start" targetRef="Human_Command" />
+    <bpmn:sequenceFlow id="HF2" sourceRef="Human_Command" targetRef="Human_Inspect" />
+    <bpmn:sequenceFlow id="HF3" sourceRef="Human_Inspect" targetRef="Human_Decide" />
+    <bpmn:sequenceFlow id="HF4" name="yes" sourceRef="Human_Decide" targetRef="Human_Command" />
+    <bpmn:sequenceFlow id="HF5" name="no" sourceRef="Human_Decide" targetRef="Human_End" />
+  </bpmn:process>
+
+  <bpmn:process id="Process_Agent" isExecutable="false">
+    <bpmn:startEvent id="Agent_Start" name="Command received" />
+    <bpmn:serviceTask id="Agent_Resolve" name="Resolve intent and canonical study context" />
+    <bpmn:exclusiveGateway id="Agent_IsResume" name="START / CONTINUE?" />
+    <bpmn:serviceTask id="Agent_Load" name="Load manifest, repo state, reviews, experiments, evidence" />
+    <bpmn:serviceTask id="Agent_Delta" name="Compute meaningful delta" />
+    <bpmn:sendTask id="Agent_Checkpoint" name="Display checkpoint and STOP" />
+    <bpmn:serviceTask id="Agent_Bounded" name="Perform one bounded REVIEW / CHECK / CHALLENGE / TRACE / EVIDENCE action" />
+    <bpmn:sendTask id="Agent_Result" name="Display evidence, finding, uncertainty and next bounded action" />
+    <bpmn:endEvent id="Agent_End" name="Return control to human" />
+    <bpmn:sequenceFlow id="AF1" sourceRef="Agent_Start" targetRef="Agent_Resolve" />
+    <bpmn:sequenceFlow id="AF2" sourceRef="Agent_Resolve" targetRef="Agent_IsResume" />
+    <bpmn:sequenceFlow id="AF3" name="yes" sourceRef="Agent_IsResume" targetRef="Agent_Load" />
+    <bpmn:sequenceFlow id="AF4" sourceRef="Agent_Load" targetRef="Agent_Delta" />
+    <bpmn:sequenceFlow id="AF5" sourceRef="Agent_Delta" targetRef="Agent_Checkpoint" />
+    <bpmn:sequenceFlow id="AF6" sourceRef="Agent_Checkpoint" targetRef="Agent_End" />
+    <bpmn:sequenceFlow id="AF7" name="no" sourceRef="Agent_IsResume" targetRef="Agent_Bounded" />
+    <bpmn:sequenceFlow id="AF8" sourceRef="Agent_Bounded" targetRef="Agent_Result" />
+    <bpmn:sequenceFlow id="AF9" sourceRef="Agent_Result" targetRef="Agent_End" />
+  </bpmn:process>
+</bpmn:definitions>
